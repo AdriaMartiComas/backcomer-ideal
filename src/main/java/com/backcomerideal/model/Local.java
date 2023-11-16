@@ -1,19 +1,19 @@
 package com.backcomerideal.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "locales_comerciales")
 public class Local {
     @Id
     private String localId;
     private String localName;
     private String address;
-    private int districtId;
+    private String districtId;
     private String district;
+    @JsonProperty("isAvailability")
     private boolean isAvailability;
     private String activityType;
     private int totalDistrictStore;
@@ -27,7 +27,7 @@ public class Local {
     }
 
     // Constructor con todos los campos
-    public Local(String localId, String localName, String address, int districtId, String district,
+    public Local(String localId, String localName, String address, String districtId, String district,
                  boolean isAvailability, String activityType, int totalDistrictStore, float longitude,
                  float latitude, float rentalPrice, float salePrice) {
         this.localId = localId;
@@ -69,11 +69,11 @@ public class Local {
         this.address = address;
     }
 
-    public int getDistrictId() {
+    public String getDistrictId() {
         return districtId;
     }
 
-    public void setDistrictId(int districtId) {
+    public void setDistrictId(String districtId) {
         this.districtId = districtId;
     }
 

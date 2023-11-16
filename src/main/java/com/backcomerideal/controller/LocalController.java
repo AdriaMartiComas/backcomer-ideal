@@ -13,23 +13,26 @@ import java.util.List;
 @RequestMapping("/locales")
 public class LocalController {
 
-    private final LocalService localService;
-
     @Autowired
-    public LocalController(LocalService localService) {
-        this.localService = localService;
-    }
+    public LocalService localService;
 
+   /* @GetMapping
+    public ResponseEntity<List<Local>> getAllLocales() {
+        List<Local> locales = localService.getAllLocales();
+        return new ResponseEntity<>(locales, HttpStatus.OK);
+    }*/
 
     @GetMapping
     public ResponseEntity<List<Local>> getAllLocales() {
         List<Local> locales = localService.getAllLocales();
-        return new ResponseEntity<>(locales, HttpStatus.OK);
+        return ResponseEntity.ok(locales);
     }
 
     @GetMapping("/distrito/{id}")
     public ResponseEntity<List<Local>> getLocalesByDistrictId(@PathVariable("id") String districtId) {
         List<Local> locales = localService.getLocalesByDistrictId(districtId);
+        System.out.println("Locales encontrados: " + locales);
+
         if (!locales.isEmpty()) {
             return new ResponseEntity<>(locales, HttpStatus.OK);
         } else {
